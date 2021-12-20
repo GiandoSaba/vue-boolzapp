@@ -20,9 +20,9 @@
         <div class="background-main"></div>
         <main class="main-container d-flex">
             <div class="left-row">
-                <header class="left-header d-flex">
+                <header class="left-header d-flex nav">
                     <div class="user-container d-flex">
-                        <img src="img/avatar_8.jpg" alt="profile-pic" class="profile_pic">
+                        <img src="img/avatar_8.jpg" alt="profile-pic" class="circle_pic">
                         <h1 class="userName">Giando</h1>
                     </div>
                     <div class="ico-container d-flex">
@@ -32,7 +32,7 @@
                     </div>
                 </header>
                 <div class="notify_popup d-flex">
-                    <div class="profile_pic d-flex">
+                    <div class="circle_pic d-flex">
                         <i class="fas fa-bell-slash"></i>
                     </div>
                     <div class="text-container">
@@ -44,9 +44,73 @@
                     <i class="fas fa-search"></i>
                     <input type="text" placeholder="Cerca o inizia una nuova chat">
                 </div>
+                <div class="chat-container">
+                    <ul>
+                        <li v-for="(contact, index) in contacts" class="div_chat d-flex" :class="(index == 2) ? 'active' : ''">
+                            <div class="chat_name_container d-flex">
+                                <img :src="`img/avatar${contact.avatar}.jpg`" :alt="contact.name" class="circle_pic">
+                                <div class="text">
+                                    <h2 class="chat_name">{{ contact.name }}</h2>
+                                    <p class="chat_last_message">
+                                        {{ getLastMessageorDate(index, 'text') }}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="chat_data_container">
+                                <p class="chat_data">{{ getLastMessageorDate(index, 'data') }}</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="right-row">
-
+                <header class="right-header d-flex nav">
+                    <div class="user-container d-flex">
+                        <img src="img/avatar_3.jpg" alt="profile-pic" class="circle_pic">
+                        <div class="text">
+                            <h1 class="userName">Samuele</h1>
+                            <p class="last-access">Ultimo accesso oggi alle 28/03/2020 16:15:22</p>
+                        </div>
+                    </div>
+                    <div class="ico-container d-flex">
+                        <i class="fas fa-search"></i>
+                        <i class="fas fa-paperclip"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                </header>
+                <main class="main-container-chat">
+                    <ul class="d-flex">
+                        <li class="message receive">
+                            <div class="message-text">
+                                La Marianna va in campagna
+                            </div>
+                            <p class="message-data">
+                                28/03/2020 10:10:40
+                            </p>
+                        </li>
+                        <li class="message send">
+                            <div class="message-text">
+                                Sicuro di non aver sbagliato chat?
+                            </div>
+                            <p class="message-data">
+                                28/03/2020 10:20:10
+                            </p>
+                        </li>
+                        <li class="message receive">
+                            <div class="message-text">
+                                Ah scusa!
+                            </div>
+                            <p class="message-data">
+                                28/03/2020 16:15:22
+                            </p>
+                        </li>
+                    </ul>
+                </main>
+                <footer class="footer-chat d-flex nav">
+                    <i class="far fa-smile"></i>
+                    <input type="text" placeholder="Scrivi un messaggio">
+                    <i class="fas fa-microphone"></i>
+                </footer>
             </div>
         </main>
     </div>

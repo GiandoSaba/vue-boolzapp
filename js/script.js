@@ -1,6 +1,7 @@
 const app = new Vue({
     el: '#app',
     data: {
+        name: 'test',
         contacts: [
             {
                 name: "Michele",
@@ -89,6 +90,18 @@ const app = new Vue({
         ],
     },
     methods: {
-        
+        getLastMessageorDate: function(contact, message) {
+            console.log(contact);
+            const messages = this.contacts[contact].messages; 
+            const messagesLength = messages.length - 1;
+            if (message == 'text') {
+                const lastMessage = messages[messagesLength].text;
+                return lastMessage;
+            } else if (message == 'data') {
+                const lastData = messages[messagesLength].date;
+                return lastData;
+            }
+
+        }
     }
 });

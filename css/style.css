@@ -9,6 +9,25 @@
     display: flex;
 }
 
+.circle_pic {
+    border-radius: 50%;
+}
+
+.user-container{
+    align-items: center;
+}
+
+.ico-container {
+    align-items: center;
+    justify-content: space-around;
+    color: #B1B1B1;
+    font-size: 1.3em;
+}
+
+.nav {
+    height: 60px;
+    background-color: #EAEAEA;
+}
 
 .body-container{
     width: 100%;
@@ -29,7 +48,7 @@
 }
 
 .main-container {
-    width: 80%;
+    width: 85%;
     height: 95%;
     min-width: 600px;
     position: absolute;
@@ -40,7 +59,7 @@
 }
 
 .left-row {
-    width: 40%;
+    width: 35%;
     background-color: #FAFAFA;
 }
 
@@ -48,17 +67,16 @@
     background-color: #EAEAEA;
     align-items: center;
     justify-content: space-between;
-    padding: 1em;
+    padding: 0.8em;
+    border-right: 1px solid lightgray;
 }
 
-.user-container {
-    align-items: center;
-    width: 70%;
+.left-header .user-container {
+    width: 80%;
 }
 
-.profile_pic {
+.user-container .circle_pic {
     width: 50px;
-    border-radius: 50%;
     margin-right: 1em;
 }
 
@@ -67,22 +85,20 @@
     
 }
 
-.ico-container {
-    align-items: center;
-    justify-content: space-around;
-    color: #B1B1B1;
-    width: 30%;
-    font-size: 1.5em;
+.left-header .ico-container {
+    width: 20%;
 }
 
 .notify_popup {
     background-color: #8EDAFC;
     padding: 1em;
     align-items: center;
+    height: 80px;
 }
 
-.notify_popup .profile_pic {
+.notify_popup .circle_pic {
     background-color: white;
+    width: 50px;
     height: 50px;
     align-items: center;
     justify-content: center;
@@ -111,7 +127,7 @@
 .search-nav {
     width: calc(100% - 1em);
     margin: 0.5em;
-    height: 2em;
+    height: 30px;
     align-items: center;
     background-color: white;
 }
@@ -126,7 +142,140 @@
     border: none;
 }
 
+.chat-container {
+    height: calc(100% - 200px);
+    overflow-y: auto;
+}
+
+.chat-container ul {
+    list-style-type: none;
+    height: 98%;
+    background-color: white;
+    margin: 0.5em 1em 0 0;
+    border-right: 1px solid lightgray;
+}
+
+.chat-container .div_chat {
+    color: rgb(189, 189, 189);
+    padding: 1em;
+    justify-content: space-between;
+}
+
+.chat-container .div_chat:hover {
+    background-color: #EAEAEA;
+}
+
+.chat-container .div_chat.active {
+    background-color: #EAEAEA;
+}
+
+.chat-container .circle_pic {
+    width: 60px;
+    margin-right: 1em;
+}
+
+.chat-container .chat_name_container {
+    font-size: 1em;
+    width: 50%;
+}
+
+.chat-container .chat_name_container .chat_name {
+    font-size: 1em;
+    color: black;
+}
+
+.chat-container .chat_name_container .chat_last_message {
+    margin-top: 0.8em;
+    font-size: 0.8em;
+    text-overflow: ellipsis;
+    width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.chat-container .chat_data_container {
+    font-size: 0.8em;
+    text-align: right;
+}
+
 .right-row {
-    width: 60%;
+    width: 65%;
     background-image: url(../img/mine.jpg);
+}
+
+.right-header {
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.8em;
+}
+
+.right-header .user-container {
+    width: 90%;
+}
+
+.right-header .ico-container {
+    width: 10%;
+}
+
+.right-header .user-container .last-access {
+    font-size: 0.8em;
+    color: rgb(145, 145, 145);
+}
+
+.main-container-chat {
+    height: calc(100% - 120px);
+    overflow-y: auto;
+}
+
+.main-container-chat ul {
+    list-style-type: none;
+    flex-direction: column;
+    margin: 2em 5em;
+}
+
+.main-container-chat .message {
+    width: 45%;
+    margin: 0.5em 0;
+    padding: 0.5em;
+    border-radius: 10px;
+}
+
+.main-container-chat .message.send {
+    background-color: #D5F9BA;
+    align-self: flex-end;
+}
+
+.main-container-chat .message.receive {
+    background-color: white;
+    align-items: flex-start;
+}
+
+.main-container-chat .message .message-text {
+    font-size: 1em;
+    margin: 0.5em;
+}
+
+.main-container-chat .message .message-data {
+    font-size: 0.7em;
+    color: grey;
+    text-align: right;
+}
+
+.footer-chat {
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2em;
+    color: grey;
+    width: 65%;
+    position: fixed;
+    bottom: 0;
+}
+
+.footer-chat input {
+    width: 90%;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    padding: 1em;
+    margin: 0 2em;
 }
