@@ -4,13 +4,51 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>Vue Boolzapp</title>
 </head>
 <body>
-    <div id="app">
-        
+    <div id="app" class="body-container">
+        <div class="background-header"></div>
+        <div class="background-main"></div>
+        <main class="main-container d-flex">
+            <div class="left-row">
+                <header class="left-header d-flex">
+                    <div class="user-container d-flex">
+                        <img src="img/avatar_8.jpg" alt="profile-pic" class="profile_pic">
+                        <h1 class="userName">Giando</h1>
+                    </div>
+                    <div class="ico-container d-flex">
+                        <i class="fas fa-circle-notch"></i>
+                        <i class="fas fa-comment-alt"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                </header>
+                <div class="notify_popup d-flex">
+                    <div class="profile_pic d-flex">
+                        <i class="fas fa-bell-slash"></i>
+                    </div>
+                    <div class="text-container">
+                        <h2>Ricevi notifiche di nuovi messaggi</h2>
+                        <h3>Attiva notifiche desktop</h3>
+                    </div>
+                </div>
+                <div class="search-nav d-flex">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Cerca o inizia una nuova chat">
+                </div>
+            </div>
+            <div class="right-row">
+
+            </div>
+        </main>
     </div>
 
     <script src="js/script.js"></script>
