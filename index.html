@@ -16,9 +16,7 @@
 </head>
 <body>
     <div id="app" class="body-container">
-        <div class="background-header"></div>
-        <div class="background-main"></div>
-        <main class="main-container d-flex">
+        <div class="main-container d-flex">
             <div class="left-row">
                 <header class="left-header d-flex nav">
                     <div class="user-container d-flex">
@@ -37,7 +35,7 @@
                     </div>
                     <div class="text-container">
                         <h2>Ricevi notifiche di nuovi messaggi</h2>
-                        <h3>Attiva notifiche desktop</h3>
+                        <a href="#">Attiva notifiche desktop</a>
                     </div>
                 </div>
                 <div class="search-nav d-flex">
@@ -46,7 +44,7 @@
                 </div>
                 <div class="chat-container">
                     <ul>
-                        <li v-for="(contact, index) in contacts" class="div_chat d-flex" :class="(index == 2) ? 'active' : ''">
+                        <li v-for="(contact, index) in contacts" class="div_chat d-flex" :class="(active == index) ? 'active' : ''" @click="active = index">
                             <div class="chat_name_container d-flex">
                                 <img :src="`img/avatar${contact.avatar}.jpg`" :alt="contact.name" class="circle_pic">
                                 <div class="text">
@@ -66,10 +64,10 @@
             <div class="right-row">
                 <header class="right-header d-flex nav">
                     <div class="user-container d-flex">
-                        <img src="img/avatar_3.jpg" alt="profile-pic" class="circle_pic">
+                        <img :src="`img/avatar${contacts[active].avatar}.jpg`" :alt="contacts[active].name" class="circle_pic">
                         <div class="text">
-                            <h1 class="userName">Samuele</h1>
-                            <p class="last-access">Ultimo accesso oggi alle 28/03/2020 16:15:22</p>
+                            <h1 class="userName">{{ contacts[active].name }}</h1>
+                            <p class="last-access">Ultimo accesso oggi alle {{ getLastMessageorDate(active, 'data') }}</p>
                         </div>
                     </div>
                     <div class="ico-container d-flex">
@@ -80,28 +78,12 @@
                 </header>
                 <main class="main-container-chat">
                     <ul class="d-flex">
-                        <li class="message receive">
+                        <li v-for="message in contacts[active].messages" class="message" :class="(message.status == 'sent' ? 'send' : 'receive')">
                             <div class="message-text">
-                                La Marianna va in campagna
+                                {{ message.text }}
                             </div>
                             <p class="message-data">
-                                28/03/2020 10:10:40
-                            </p>
-                        </li>
-                        <li class="message send">
-                            <div class="message-text">
-                                Sicuro di non aver sbagliato chat?
-                            </div>
-                            <p class="message-data">
-                                28/03/2020 10:20:10
-                            </p>
-                        </li>
-                        <li class="message receive">
-                            <div class="message-text">
-                                Ah scusa!
-                            </div>
-                            <p class="message-data">
-                                28/03/2020 16:15:22
+                                {{ message.date }}
                             </p>
                         </li>
                     </ul>
@@ -112,7 +94,7 @@
                     <i class="fas fa-microphone"></i>
                 </footer>
             </div>
-        </main>
+        </div>
     </div>
 
     <script src="js/script.js"></script>
