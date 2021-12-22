@@ -4,6 +4,7 @@ const app = new Vue({
         lastAccess: '',
         active: null,
         newMessage: '',
+        search: null,
         contacts: [
             {
                 name: "Michele",
@@ -89,12 +90,10 @@ const app = new Vue({
                     },
                 ],
             },
-        ],
+        ]
     },
     created() {
         this.active = 0;
-        const active = this.active;
-        this.lastAccess = 'Ultimo accesso il ' + this.getLastMessageorDate(active, 'data');
     },
     methods: {
         getLastMessageorDate: function(contact, message) {
@@ -142,7 +141,11 @@ const app = new Vue({
             newMessage.date = data;
             newMessage.text = 'Ok';
             this.contacts[active].messages.push(newMessage);
-        }
+        },
 
+        showContact: function(contact) {
+            const name = contact.name.toLowerCase();
+            return (name.includes(this.search.toLowerCase()));
+        }
     }
 });
