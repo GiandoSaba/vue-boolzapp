@@ -109,7 +109,8 @@
                 <footer class="footer-chat d-flex nav">
                     <i class="far fa-smile"></i>
                     <input type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendNewMessage(newMessage,active)">
-                    <i class="fas fa-microphone"></i>
+                    <i v-if="newMessage.trim() == ''" class="fas fa-microphone"></i>
+                    <i v-else @click="sendNewMessage(newMessage,active)" class="fas fa-paper-plane"></i>
                 </footer>
             </div>
         </div>

@@ -174,7 +174,7 @@ const app = new Vue({
             setTimeout(() => {
                 const now = dayjs();
                 this.contacts[active].lastAccess = `Ultimo accesso oggi alle ${now.format('HH')}:${now.format('mm')}`;
-            }, 5000);
+            }, 3000);
         },
 
         showContact: function(contact) {
