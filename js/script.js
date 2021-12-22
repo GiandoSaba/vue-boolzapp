@@ -104,6 +104,34 @@ const app = new Vue({
                     },
                 ],
             },
+            {
+                name: "Nicola",
+                avatar: "_5",
+                visible: false,
+                lastAccess: null,
+                messages: [],
+            },
+            {
+                name: "Luana",
+                avatar: "_6",
+                visible: false,
+                lastAccess: null,
+                messages: [],
+            },
+            {
+                name: "Riccardo",
+                avatar: "_7",
+                visible: false,
+                lastAccess: null,
+                messages: [],
+            },
+            {
+                name: "Fernando",
+                avatar: "_8",
+                visible: false,
+                lastAccess: null,
+                messages: [],
+            },
         ],
         answers: [
             'Per quanto posso vedere, sì',
@@ -123,21 +151,27 @@ const app = new Vue({
             'Molto incerto'
         ],
         messageSent: false,
+        menuClick: false,
     },
     created() {
+        this.search = '';
         this.active = 0;
         this.getLastAccessData();
     },
     methods: {
         getLastMessageorDate: function(contact, message) {
-            const messages = this.contacts[contact].messages; 
-            const messagesLength = messages.length - 1;
-            if (message == 'text') {
-                const lastMessage = messages[messagesLength].text;
-                return lastMessage;
-            } else if (message == 'data') {
-                const lastData = messages[messagesLength].date;
-                return lastData;
+            if (this.contacts[contact].messages.length > 0) {
+                const messages = this.contacts[contact].messages; 
+                const messagesLength = messages.length - 1;
+                if (message == 'text') {
+                    const lastMessage = messages[messagesLength].text;
+                    return lastMessage;
+                } else if (message == 'data') {
+                    const lastData = messages[messagesLength].date;
+                    return lastData;
+                }
+            } else {
+                return '';
             }
         },
 
@@ -196,7 +230,6 @@ const app = new Vue({
         },
 
         showContact: function(contact) {
-            const name = contact.name.toLowerCase();
             return (contact.name.toLowerCase().includes(this.search.toLowerCase()));
         },
 
@@ -219,6 +252,32 @@ const app = new Vue({
             const randomIndex = Math.floor(Math.random() * (max - min) + min);
 
             return array[randomIndex];
+        },
+
+        deleteMessages: function(active) {
+            this.menuClick = false;
+            this.contacts[active].messages = [];
+            
+        },
+
+        deleteMessage: function(index) {
+            this.contacts[this.active].messages.splice(index, 1);
+        },
+
+        deleteChat: function() {
+            this.menuClick = false;
+            this.contacts[this.active].visible = false;
+            this.active = 0;
+            while (!this.contacts[this.active].visible) {
+                this.active++;
+            }
+
+        },
+
+        activeNewChat: function(index) {
+            this.active = index;
+            this.contacts[index].visible = true;
+            this.search = '';
         }
 
     }

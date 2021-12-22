@@ -44,7 +44,7 @@
                     <input type="text" placeholder="Cerca o inizia una nuova chat" v-model.trim="search">
                 </div>
                 <div class="chat-container">
-                    <ul v-if="search == null">
+                    <ul v-if="search == ''">
                         <li v-for="(contact, index) in contacts" v-show="contact.visible" class="div_chat d-flex" :class="(active == index) ? 'active' : ''" @click="active = index">
                             <div class="chat_name_container d-flex">
                                 <img :src="`img/avatar${contact.avatar}.jpg`" :alt="contact.name" class="circle_pic">
@@ -61,7 +61,7 @@
                         </li>
                     </ul>
                     <ul v-else>
-                        <li v-for="(contact, index) in contacts" v-show="showContact(contact)" class="div_chat d-flex" :class="(active == index) ? 'active' : ''" @click="active = index">
+                        <li v-for="(contact, index) in contacts" v-show="showContact(contact)" class="div_chat d-flex" :class="(active == index) ? 'active' : ''" @click="activeNewChat(index)">
                             <div class="chat_name_container d-flex">
                                 <img :src="`img/avatar${contact.avatar}.jpg`" :alt="contact.name" class="circle_pic">
                                 <div class="text">
@@ -91,12 +91,22 @@
                     <div class="ico-container d-flex">
                         <i class="fas fa-search"></i>
                         <i class="fas fa-paperclip"></i>
-                        <i class="fas fa-ellipsis-v"></i>
+                        <i @click="menuClick = !menuClick" class="fas fa-ellipsis-v"></i>
+                        <div v-show="menuClick" class="message-menu-list">
+                            <ul>
+                                <li @click="deleteChat">
+                                    Elimina Chat
+                                </li>
+                                <li @click="deleteMessages(active)">
+                                    Elimina Messaggi della chat
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </header>
                 <main class="main-container-chat">
                     <ul class="d-flex">
-                        <li v-for="message in contacts[active].messages" class="message" :class="message.status">
+                        <li v-for="(message,index) in contacts[active].messages" class="message" :class="message.status">
                             <div class="message-text">
                                 {{ message.text }}
                             </div>
@@ -107,9 +117,9 @@
                             <div v-show="message.hover" class="message-menu-list">
                                 <ul>
                                     <li>
-                                        Info Message
+                                        Message Info
                                     </li>
-                                    <li>
+                                    <li @click="deleteMessage(index)">
                                         Delete Message
                                     </li>
                                 </ul>

@@ -205,7 +205,42 @@ i {
 
 .right-header .ico-container {
     width: 10%;
+    position: relative;
 }
+
+.ico-container .message-menu-list {
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    width: 300px;
+    z-index: 4;
+    background-color: white;
+    font-size: 0.8em;
+    color: black;
+    text-align: center;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px #888888;
+}
+
+.ico-container .message-menu-list ul {
+    margin: 0;
+}
+
+.ico-container .message-menu-list li{
+    padding: 1.5em 0;
+    margin: 0.5em 0;
+    border-radius: 5px;
+}
+
+.ico-container .message-menu-list li:hover{
+    background-color: lightgray;
+    cursor: pointer;
+}
+
+.ico-container .message-menu-list ul{
+    list-style-type: none;
+}
+
 
 .right-header .user-container .last-access {
     font-size: 0.8em;
@@ -222,6 +257,7 @@ i {
     flex-direction: column;
     margin: 2em 5em;
 }
+
 
 .main-container-chat .message {
     width: 45%;
@@ -304,9 +340,8 @@ i {
 
 .main-container-chat .message .message-menu-list li:hover{
     background-color: lightgray;
+    cursor: pointer;
 }
-
-
 
 .footer-chat {
     justify-content: space-between;
