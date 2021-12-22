@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
         integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +21,7 @@
             <div class="left-row">
                 <header class="left-header d-flex nav">
                     <div class="user-container d-flex">
-                        <img src="img/avatar_8.jpg" alt="profile-pic" class="circle_pic">
+                        <img src="img/avatar_io.jpg" alt="profile-pic" class="circle_pic">
                         <h1 class="userName">Giando</h1>
                     </div>
                     <div class="ico-container d-flex">
@@ -67,7 +68,7 @@
                         <img :src="`img/avatar${contacts[active].avatar}.jpg`" :alt="contacts[active].name" class="circle_pic">
                         <div class="text">
                             <h1 class="userName">{{ contacts[active].name }}</h1>
-                            <p class="last-access">Ultimo accesso oggi alle {{ getLastMessageorDate(active, 'data') }}</p>
+                            <p class="last-access">{{ lastAccess }}</p>
                         </div>
                     </div>
                     <div class="ico-container d-flex">
@@ -78,7 +79,7 @@
                 </header>
                 <main class="main-container-chat">
                     <ul class="d-flex">
-                        <li v-for="message in contacts[active].messages" class="message" :class="(message.status == 'sent' ? 'send' : 'receive')">
+                        <li v-for="message in contacts[active].messages" class="message" :class="message.status">
                             <div class="message-text">
                                 {{ message.text }}
                             </div>
@@ -90,7 +91,7 @@
                 </main>
                 <footer class="footer-chat d-flex nav">
                     <i class="far fa-smile"></i>
-                    <input type="text" placeholder="Scrivi un messaggio">
+                    <input type="text" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendNewMessage(newMessage,active)">
                     <i class="fas fa-microphone"></i>
                 </footer>
             </div>

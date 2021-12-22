@@ -1,7 +1,9 @@
 const app = new Vue({
     el: '#app',
     data: {
-        active: 1,
+        lastAccess: '',
+        active: null,
+        newMessage: '',
         contacts: [
             {
                 name: "Michele",
@@ -89,9 +91,13 @@ const app = new Vue({
             },
         ],
     },
+    created() {
+        this.active = 0;
+        const active = this.active;
+        this.lastAccess = 'Ultimo accesso il ' + this.getLastMessageorDate(active, 'data');
+    },
     methods: {
         getLastMessageorDate: function(contact, message) {
-            console.log(contact);
             const messages = this.contacts[contact].messages; 
             const messagesLength = messages.length - 1;
             if (message == 'text') {
@@ -101,7 +107,42 @@ const app = new Vue({
                 const lastData = messages[messagesLength].date;
                 return lastData;
             }
+        },
 
+        sendNewMessage: function(message, active) {
+            this.newMessage = '';
+            if (message.trim() !== '') {
+                const newMessage = 
+                {
+                    date: '',
+                    text: '',
+                    status: "sent"
+                }
+                let now = dayjs();
+                const data = `${now.date()}/${now.month()}/${now.year()} ${now.hour()}:${now.minute()}:${now.second()}`
+                newMessage.date = data;
+                newMessage.text = message;
+                this.contacts[active].messages.push(newMessage);
+                
+                setTimeout(() => {
+                    this.receiveNewMessage(active);
+                }, 1000);
+            }
+        },
+
+        receiveNewMessage: function(active) {
+            const newMessage =
+            {
+                date: '',
+                text: '',
+                status: "received"
+            }
+            let now = dayjs();
+            const data = `${now.date()}/${now.month()}/${now.year()} ${now.hour()}:${now.minute()}:${now.second()}`
+            newMessage.date = data;
+            newMessage.text = 'Ok';
+            this.contacts[active].messages.push(newMessage);
         }
+
     }
 });

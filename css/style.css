@@ -231,12 +231,12 @@ i {
     border-radius: 10px;
 }
 
-.main-container-chat .message.send {
+.main-container-chat .message.sent {
     background-color: #D5F9BA;
     align-self: flex-end;
 }
 
-.main-container-chat .message.receive {
+.main-container-chat .message.received {
     background-color: white;
     align-items: flex-start;
 }
