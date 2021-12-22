@@ -1,7 +1,6 @@
 const app = new Vue({
     el: '#app',
     data: {
-        lastAccess: '',
         active: null,
         newMessage: '',
         search: null,
@@ -10,6 +9,7 @@ const app = new Vue({
                 name: "Michele",
                 avatar: "_1",
                 visible: true,
+                lastAccess: null,
                 messages: [
                     {
                         date: "10/01/2020 15:30:55",
@@ -32,6 +32,7 @@ const app = new Vue({
                 name: "Fabio",
                 avatar: "_2",
                 visible: true,
+                lastAccess: null,
                 messages: [
                     {
                         date: "20/03/2020 16:30:00",
@@ -55,6 +56,7 @@ const app = new Vue({
                 name: "Samuele",
                 avatar: "_3",
                 visible: true,
+                lastAccess: null,
                 messages: [
                     {
                         date: "28/03/2020 10:10:40",
@@ -77,6 +79,7 @@ const app = new Vue({
                 name: "Luisa",
                 avatar: "_4",
                 visible: true,
+                lastAccess: null,
                 messages: [
                     {
                         date: "10/01/2020 15:30:55",
@@ -90,10 +93,28 @@ const app = new Vue({
                     },
                 ],
             },
+        ],
+        answers: [
+            'Per quanto posso vedere, sì',
+            'È certo',
+            'È decisamente così',
+            'Molto probabilmente',
+            'Le prospettive sono buone',
+            'I segni indicano di sì',
+            'Senza alcun dubbio',
+            'Sì',
+            'sì, senza dubbio',
+            'Ci puoi contare',
+            'Non ci contare',
+            'La mia risposta è no',
+            'Le mie fonti dicono di no',
+            'Le prospettive non sono buone',
+            'Molto incerto'
         ]
     },
     created() {
         this.active = 0;
+        this.getLastAccessData();
     },
     methods: {
         getLastMessageorDate: function(contact, message) {
@@ -118,14 +139,20 @@ const app = new Vue({
                     status: "sent"
                 }
                 let now = dayjs();
-                const data = `${now.date()}/${now.month()}/${now.year()} ${now.hour()}:${now.minute()}:${now.second()}`
+                const data = `${now.format('HH')}:${now.format('mm')}`
                 newMessage.date = data;
                 newMessage.text = message;
                 this.contacts[active].messages.push(newMessage);
-                
                 setTimeout(() => {
-                    this.receiveNewMessage(active);
-                }, 1000);
+                    this.contacts[active].lastAccess = 'online'
+                    setTimeout(() => {
+                        this.contacts[active].lastAccess = 'sta digitando..'
+                        setTimeout(() => {
+                            this.receiveNewMessage(active);
+                        }, 1000);
+                    }, 2000);
+                }, 2000);
+
             }
         },
 
@@ -137,15 +164,44 @@ const app = new Vue({
                 status: "received"
             }
             let now = dayjs();
-            const data = `${now.date()}/${now.month()}/${now.year()} ${now.hour()}:${now.minute()}:${now.second()}`
+            const data = `${now.format('HH')}:${now.format('mm')}`;
             newMessage.date = data;
-            newMessage.text = 'Ok';
+            newMessage.text = this.getRandomAnswer(this.answers);
             this.contacts[active].messages.push(newMessage);
+            
+            this.contacts[active].lastAccess = 'online';
+            
+            setTimeout(() => {
+                const now = dayjs();
+                this.contacts[active].lastAccess = `Ultimo accesso oggi alle ${now.format('HH')}:${now.format('mm')}`;
+            }, 5000);
         },
 
         showContact: function(contact) {
             const name = contact.name.toLowerCase();
-            return (name.includes(this.search.toLowerCase()));
+            return (contact.name.toLowerCase().includes(this.search.toLowerCase()));
+        },
+
+        getLastAccessData: function() {
+            for (let i = 0; i < this.contacts.length; i++) {
+                const contact = this.contacts[i];
+                const messages = contact.messages;
+                messages.forEach(message => {
+                    if (message.status == 'received') {
+                        this.contacts[i].lastAccess = `Ultimo accesso: ${message.date}`;
+                    }
+                });
+                
+            }
+        },
+
+        getRandomAnswer: function(array) {
+            const min = 0;
+            const max = array.length - 1;
+            const randomIndex = Math.floor(Math.random() * (max - min) + min);
+
+            return array[randomIndex];
         }
+
     }
 });

@@ -85,7 +85,7 @@
                         <img :src="`img/avatar${contacts[active].avatar}.jpg`" :alt="contacts[active].name" class="circle_pic">
                         <div class="text">
                             <h1 class="userName">{{ contacts[active].name }}</h1>
-                            <p class="last-access">Ultimo accesso: {{ getLastMessageorDate(active, 'data') }}</p>
+                            <p class="last-access">{{ contacts[active].lastAccess }}</p>
                         </div>
                     </div>
                     <div class="ico-container d-flex">
