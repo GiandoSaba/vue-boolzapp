@@ -103,6 +103,17 @@
                             <p class="message-data">
                                 {{ message.date }}
                             </p>
+                            <i @click="message.hover = !message.hover" class="fas fa-angle-down message-menu"></i>
+                            <div v-show="message.hover" class="message-menu-list">
+                                <ul>
+                                    <li>
+                                        Info Message
+                                    </li>
+                                    <li>
+                                        Delete Message
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                     </ul>
                 </main>
