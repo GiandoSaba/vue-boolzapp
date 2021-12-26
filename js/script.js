@@ -4,6 +4,7 @@ const app = new Vue({
         active: null,
         newMessage: '',
         search: null,
+        selected: null,
         contacts: [
             {
                 name: "Michele",
@@ -152,10 +153,11 @@ const app = new Vue({
         ],
         messageSent: false,
         menuClick: false,
+        chatMenuClick: false,
     },
     created() {
         this.search = '';
-        this.active = 0;
+        this.selected = 'f-medium',
         this.getLastAccessData();
     },
     methods: {

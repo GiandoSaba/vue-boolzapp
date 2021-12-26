@@ -17,7 +17,7 @@
 </head>
 <body>
     <div id="app" class="body-container">
-        <div class="main-container d-flex">
+        <div class="main-container d-flex" :class="selected">
             <div class="left-row">
                 <header class="left-header d-flex nav">
                     <div class="user-container d-flex">
@@ -27,7 +27,27 @@
                     <div class="ico-container d-flex">
                         <i class="fas fa-circle-notch"></i>
                         <i class="fas fa-comment-alt"></i>
-                        <i class="fas fa-ellipsis-v"></i>
+                        <i @click="menuClick = !menuClick" class="fas fa-ellipsis-v"></i>
+                        <div v-show="menuClick" class="message-menu-list">
+                            <ul>
+                                <li>
+                                    <label for="charSize">
+                                        Dimensione carattere
+                                    </label>
+                                    <select v-model="selected" name="charSize" id="charSize">
+                                        <option value="f-small">
+                                            Piccolo
+                                        </option>
+                                        <option value="f-medium">
+                                            Medio
+                                        </option>
+                                        <option value="f-large">
+                                            Grande
+                                        </option>
+                                    </select>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </header>
                 <div class="notify_popup d-flex">
@@ -79,7 +99,7 @@
 
                 </div>
             </div>
-            <div class="right-row">
+            <div v-if="active != null" class="right-row">
                 <header class="right-header d-flex nav">
                     <div class="user-container d-flex">
                         <img :src="`img/avatar${contacts[active].avatar}.jpg`" :alt="contacts[active].name" class="circle_pic">
@@ -91,8 +111,8 @@
                     <div class="ico-container d-flex">
                         <i class="fas fa-search"></i>
                         <i class="fas fa-paperclip"></i>
-                        <i @click="menuClick = !menuClick" class="fas fa-ellipsis-v"></i>
-                        <div v-show="menuClick" class="message-menu-list">
+                        <i @click="chatMenuClick = !chatMenuClick" class="fas fa-ellipsis-v"></i>
+                        <div v-show="chatMenuClick" class="message-menu-list">
                             <ul>
                                 <li @click="deleteChat">
                                     Elimina Chat
@@ -133,6 +153,12 @@
                     <i v-if="newMessage.trim() == ''" class="fas fa-microphone"></i>
                     <i v-else @click="sendNewMessage(newMessage,active)" class="fas fa-paper-plane"></i>
                 </footer>
+            </div>
+            <div v-else class="right-row splash d-flex">
+                <div class="splash-container">
+                        <h1>Benvenuto in Boolzapp</h1>
+                        <p>Seleziona un contatto per continuare una chat o utilizza la barra di ricerca per iniziarne una nuova</p>
+                </div>
             </div>
         </div>
     </div>

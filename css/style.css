@@ -3,6 +3,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
+    font-size: 100%;
 }
 
 .d-flex {
@@ -15,6 +16,18 @@
 
 i {
     cursor: pointer;
+}
+
+.f-small {
+    font-size: 80%;
+}
+
+.f-medium {
+    font-size: 100%;
+}
+
+.f-large {
+    font-size: 120%;
 }
 
 .user-container{
@@ -193,6 +206,7 @@ i {
     background-image: url(../img/mine.jpg);
 }
 
+
 .right-header {
     align-items: center;
     justify-content: space-between;
@@ -203,7 +217,7 @@ i {
     width: 90%;
 }
 
-.right-header .ico-container {
+.ico-container {
     width: 10%;
     position: relative;
 }
@@ -359,3 +373,23 @@ i {
     padding: 1em;
     margin: 0 2em;
 }
+
+.splash-container {
+    width: 50%;
+    margin: auto;
+    padding: 2em;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+}
+
+.splash {
+    border: 10px solid #EAEAEA;
+    border-left: none;
+}
+
+.splash-container h1 {
+    color: #009688;
+    margin-bottom: 1em;
+}
+
