@@ -154,11 +154,16 @@ const app = new Vue({
         messageSent: false,
         menuClick: false,
         chatMenuClick: false,
+        loaded : false,
     },
     created() {
         this.search = '';
         this.selected = 'f-medium',
         this.getLastAccessData();
+
+        setTimeout(() => {
+            this.loaded = true;
+        }, 1000);
     },
     methods: {
         getLastMessageorDate: function(contact, message) {

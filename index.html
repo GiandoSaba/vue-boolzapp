@@ -17,7 +17,7 @@
 </head>
 <body>
     <div id="app" class="body-container">
-        <div class="main-container d-flex" :class="selected">
+        <div class="main-container d-flex" :class="selected" v-if="loaded">
             <div class="left-row">
                 <header class="left-header d-flex nav">
                     <div class="user-container d-flex">
@@ -159,6 +159,12 @@
                         <h1>Benvenuto in Boolzapp</h1>
                         <p>Seleziona un contatto per continuare una chat o utilizza la barra di ricerca per iniziarne una nuova</p>
                 </div>
+            </div>
+        </div>
+        <div v-else class="loading-page-container d-flex">
+            <div class="loading-text">
+                <h1>Benvenuto in BOOLZAP</h1>
+
             </div>
         </div>
     </div>
