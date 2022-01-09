@@ -155,6 +155,7 @@ const app = new Vue({
         menuClick: false,
         chatMenuClick: false,
         loaded : false,
+        darkmode: false,
     },
     created() {
         this.search = '';
